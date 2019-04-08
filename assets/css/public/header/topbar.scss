@@ -41,6 +41,7 @@
       }
     }
   }
+
   .m-nav{
     float: right;
     margin: 0;
@@ -68,7 +69,6 @@
         &.list:hover {
           border: 1px solid #E5E5E5;
           border-top: none;
-
           >dl {
             display: block;
           }
