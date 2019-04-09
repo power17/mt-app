@@ -1,6 +1,6 @@
 <template>
   <el-container class="layout-default">
-    <el-header>
+    <el-header style="height: 197px;">
       <my-header></my-header>
     </el-header>
     <el-main>
@@ -17,4 +17,9 @@
     }
   }
 </script>
+<style lang="scss">
+  @import "@/assets/css/public/layout.scss";
+
+
+</style>
 
