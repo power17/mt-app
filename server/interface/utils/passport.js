@@ -2,7 +2,7 @@ import passport from 'koa-passport'
 import LocalStrategy from 'passport-local'
 import UserModel from './../../dbs/models/user'
 //用户登陆
-passport.use(new LocalStrategy(async function (username,password,done) {
+passport.use('local', new LocalStrategy(async function (username,password,done) {
     let where = {
        username
     };

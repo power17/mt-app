@@ -27,6 +27,7 @@ async function start() {
     port = process.env.PORT || 3000
   } = nuxt.options.server
 
+
 //koa的设置
   app.keys = ['mt','keyskeys']
   app.proxy = true
