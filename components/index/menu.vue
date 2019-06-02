@@ -11,7 +11,6 @@
         <template v-for="(item,index) in curdetail.child" >
           <h4 :key="index">{{item.title}}</h4>
           <span v-for="v in item.child" :key="v">{{v}}</span>
-
         </template>
       </div>
     </div>

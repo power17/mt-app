@@ -6,9 +6,7 @@
     <el-main>
       <nuxt />
     </el-main>
-    <el-footer>
-      <my-footer height="100%"></my-footer>
-    </el-footer>
+    <my-footer height="100%"></my-footer>
   </el-container>
 </template>
 <script>

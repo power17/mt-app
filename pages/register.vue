@@ -22,7 +22,8 @@
           </el-form-item>
           <el-form-item label="邮箱" prop="email">
             <el-input v-model="ruleForm.email"></el-input>
-            <el-button round size="mini">发送验证码</el-button>
+            <el-button round size="mini" @click="sendMessage">发送验证码</el-button>
+            <span class="status">{{ statusMsg }}</span>
           </el-form-item>
           <el-form-item label="验证码" prop="code">
             <el-input v-model="ruleForm.code"></el-input>
@@ -64,6 +65,7 @@
         }
       };
       return {
+        statusMsg:'',
         ruleForm: {
           name: '',
           email: '',
@@ -113,6 +115,46 @@
           }
         });
       },
+      sendMessage(){
+        const self = this;
+        let namepass,emailpass;
+        if(self.timerid) {
+          return false;
+        }
+        this.$refs['ruleForm'].validateField('name',(valid) => {
+          namepass = valid
+        })
+        self.message = ''
+        if(namepass) return false
+        this.$refs['ruleForm'].validateField('email',(valid) => {
+          emailpass = valid
+        })
+        if(!namepass && !emailpass) {
+          self.$axios.post('/users/verify', {
+            username: encodeURIComponent(self.ruleForm.name),
+            email: self.ruleForm.email
+          }).then(({
+            status,
+            data
+          }) => {
+            if(status === 200 && data && data.code === 0 ) {
+              let count =60
+              self.statusMsg = `验证码已发送，剩余${count--}秒`
+              self.timerid = setInterval(()=>{
+                self.statusMsg = `验证码已发送，剩余${count--}秒`
+                if(count === 0) {
+                  clearInterval(self.timerid)
+                  self.statusMsg = ''
+                }
+              },1000)
+            }else{
+              self.statusMsg = data.msg
+            }
+          })
+        }
+
+
+      }
 
     }
   }
