@@ -122,7 +122,6 @@ router.post('/signup',async (ctx)=> {
   //注册成功
   if(nuser) {
     let res = await axios.post('/users/signin',{username,password,})
-
     if(res.data && res.data.code === 0) {
       ctx.body = {
         code: 0,
@@ -171,7 +170,8 @@ router.post ('/signin', async (ctx,next) => {
 
 
 
-router .get ('/exit', async (ctx,next) => {
+router.get ('/exit', async (ctx,next) => {
+  await ctx.logout()
   if(!ctx.isAuthenticated()) {
     ctx.body = {
       code:0
